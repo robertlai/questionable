@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { TTL_MS } from '../../util/constants';
 import { connectToDatabase } from '../../util/mongodb';
 import styles from '../../styles/common.module.css';
 
 const POLL_PERIOD = 3000;
-const TTL_MS = 1000 * 60 * 60 * 24 * 30;
 
 export default function JoinPage(props) {
     const textInput = useRef(null);

@@ -11,5 +11,5 @@ export default async function post(req, res) {
             createdAt: Date.now(),
         });
 
-    res.status(200).json({ success: true });
+    return res.status(200).json({ success: true });
 }

@@ -14,5 +14,5 @@ export default async function get(req, res) {
         text: submission.text,
     }));
 
-    res.status(200).json({ submissions: formattedSubmissions });
+    return res.status(200).json({ submissions: formattedSubmissions });
 }

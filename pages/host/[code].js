@@ -1,8 +1,7 @@
 import Link from 'next/link';
+import { TTL_MS } from '../../util/constants';
 import { connectToDatabase } from '../../util/mongodb';
 import styles from '../../styles/common.module.css';
-
-const TTL_MS = 1000 * 60 * 60 * 24 * 30;
 
 export default function HostPage(props) {
     return (

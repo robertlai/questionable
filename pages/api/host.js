@@ -1,7 +1,7 @@
+import { TTL_MS } from '../../util/constants';
 import { connectToDatabase } from '../../util/mongodb';
 
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-const TTL_MS = 1000 * 60 * 60 * 24 * 30;
 
 export default async function host(req, res) {
     const { db } = await connectToDatabase();
@@ -46,8 +46,8 @@ export default async function host(req, res) {
     }
 
     if (attemptNum === 2) {
-        res.status(500).json({ message: 'Failed to create room' });
+        return res.status(500).json({ message: 'Failed to create room' });
     }
 
-    res.redirect('/host/' + code);
+    return res.redirect('/host/' + code);
 }
