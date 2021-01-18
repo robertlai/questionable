@@ -1,4 +1,4 @@
-import styles from '../../styles/HostIndexPage.module.css';
+import styles from '../../styles/common.module.css';
 
 export default function HostIndexPage() {
     return (

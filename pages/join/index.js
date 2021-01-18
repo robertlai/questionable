@@ -1,4 +1,4 @@
-import styles from '../../styles/JoinIndexPage.module.css';
+import styles from '../../styles/common.module.css';
 
 export default function JoinIndexPage() {
     return (

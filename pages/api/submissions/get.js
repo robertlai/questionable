@@ -9,15 +9,10 @@ export default async function get(req, res) {
         .sort({ roomCode: 1 })
         .toArray();
 
-    const formattedSubmissions = [];
-    for (let i = 0; i < submissions.length; i++) {
-        formattedSubmissions.push({
-            text: submissions[i].text,
-            createdAt: submissions[i].createdAt,
-        });
-    }
+    const formattedSubmissions = submissions.map((submission) => ({
+        createdAt: submission.createdAt,
+        text: submission.text,
+    }));
 
-    res.status(200).json({
-        submissions: formattedSubmissions,
-    });
+    res.status(200).json({ submissions: formattedSubmissions });
 }

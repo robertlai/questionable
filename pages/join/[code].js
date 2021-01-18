@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { connectToDatabase } from '../../util/mongodb';
-import styles from '../../styles/JoinPage.module.css';
+import styles from '../../styles/common.module.css';
 
 const POLL_PERIOD = 3000;
 const TTL_MS = 1000 * 60 * 60 * 24 * 30;
@@ -39,13 +39,11 @@ export default function JoinPage(props) {
             <h1>{props.title}</h1>
             <span>Code: {props.code}</span>
             <ul>
-                {submissions.map(submission => {
-                    return (
-                        <li key={submission.text + submission.createdAt}>
-                            {submission.text}
-                        </li>
-                    );
-                })}
+                {submissions.map((submission) => (
+                    <li key={submission.text + submission.createdAt}>
+                        {submission.text}
+                    </li>
+                ))}
             </ul>
             <input className={styles.input} name="text" placeholder="Text" ref={textInput} />
             <button className={styles.link} onClick={handleSubmit}>Submit</button>
@@ -56,11 +54,10 @@ export default function JoinPage(props) {
 export async function getServerSideProps(context) {
     const { db } = await connectToDatabase();
 
-    const code = context.params.code;
     const room = await db
         .collection('rooms')
         .findOne({
-            code: code,
+            code: context.params.code,
             createdAt: { $gt: Date.now() - TTL_MS },
         });
 

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { connectToDatabase } from '../../util/mongodb';
-import styles from '../../styles/HostPage.module.css';
+import styles from '../../styles/common.module.css';
 
 const TTL_MS = 1000 * 60 * 60 * 24 * 30;
 
@@ -20,11 +20,10 @@ export default function HostPage(props) {
 export async function getServerSideProps(context) {
     const { db } = await connectToDatabase();
 
-    const code = context.params.code;
     const room = await db
         .collection('rooms')
         .findOne({
-            code: code,
+            code: context.params.code,
             createdAt: { $gt: Date.now() - TTL_MS },
         });
 
