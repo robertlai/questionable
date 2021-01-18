@@ -9,7 +9,7 @@ export default async function host(req, res) {
     let code = "";
     let attemptNum = 0;
 
-    for (attemptNum = 0; i < 3; i++) {
+    for (attemptNum = 0; attemptNum < 3; attemptNum++) {
         code = "";
         for (let i = 0; i < 4; i++) {
             const index = Math.floor(Math.random() * ALPHABET.length);
