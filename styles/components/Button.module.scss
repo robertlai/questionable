@@ -1,0 +1,35 @@
+@import 'styles/colors';
+
+.button {
+    min-width: 100px;
+    border: none;
+    border-radius: 32px;
+    padding: 12px;
+    margin: 8px 0;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+
+    box-shadow: 2px 2px $dark-blue;
+    transition: box-shadow 0.2s;
+
+    &:hover, &:focus {
+        box-shadow: 4px 4px $dark-blue;
+        outline: none;
+    }
+}
+
+.blue {
+    background-color: $blue;
+    color: $white;
+}
+
+.white {
+    background-color: $white;
+    color: $blue;
+}
+
+.full {
+    width: 100%;
+}

@@ -1,13 +1,16 @@
-import styles from '../../styles/common.module.css';
+import Button from 'components/Button';
+import Form from 'components/Form';
+import Input from 'components/Input';
+import PageWrapper from 'components/PageWrapper';
 
-export default function HostIndexPage() {
-    return (
-        <form action="/api/host" method="post">
-            <div className={styles.container}>
-                <h1>Host</h1>
-                <input className={styles.input} name="title" placeholder="Title" />
-                <input className={styles.link} type="submit" value="Host" />
-            </div>
-        </form>
-    );
-}
+const HostIndexPage = () => (
+    <PageWrapper>
+        <Form action="/api/host" method="post">
+            <h1>Host</h1>
+            <Input name="title" placeholder="Title" />
+            <Button full color="blue">Host</Button>
+        </Form>
+    </PageWrapper>
+);
+
+export default HostIndexPage;

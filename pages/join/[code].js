@@ -1,57 +1,65 @@
 import { useEffect, useRef, useState } from 'react';
-import Link from 'next/link';
-import { TTL_MS } from '../../util/constants';
-import { connectToDatabase } from '../../util/mongodb';
-import styles from '../../styles/common.module.css';
+import Button from 'components/Button';
+import Input from 'components/Input';
+import PageWrapper from 'components/PageWrapper';
+import { TTL_MS } from 'util/constants';
+import { connectToDatabase } from 'util/mongodb';
+import styles from 'styles/pages/join/[code].module.scss';
 
-const POLL_PERIOD = 3000;
+const POLL_PERIOD = 1000;
 
-export default function JoinPage(props) {
+const JoinPage = ({ code, title }) => {
     const textInput = useRef(null);
     const [submissions, setSubmissions] = useState([]);
 
     useEffect(() => {
         const interval = setInterval(async () => {
-            const response = await fetch('/api/submissions/get?roomCode=' + props.code);
+            const response = await fetch('/api/submissions/get?roomCode=' + code);
             const body = await response.json();
             setSubmissions(body.submissions);
         }, POLL_PERIOD);
 
-        return () => {
-            clearInterval(interval);
-        };
+        return () => clearInterval(interval);
     });
 
-    function handleSubmit() {
+    const handleSubmit = () => {
         const text = textInput.current.value;
         fetch('/api/submissions/post', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                roomCode: props.code,
+                roomCode: code,
                 text: text,
             }),
         });
-    }
+    };
 
     return (
-        <div className={styles.container}>
-            <h1>{props.title}</h1>
-            <span>Code: {props.code}</span>
-            <ul>
-                {submissions.map((submission) => (
-                    <li key={submission.text + submission.createdAt}>
-                        {submission.text}
-                    </li>
-                ))}
-            </ul>
-            <input className={styles.input} name="text" placeholder="Text" ref={textInput} />
-            <button className={styles.link} onClick={handleSubmit}>Submit</button>
-        </div>
+        <PageWrapper>
+            <div className={styles.content}>
+                <div className={styles.header}>
+                    <h1>{title}</h1>
+                    <span>Code: {code}</span>
+                </div>
+                <div className={styles.submissionsContainer}>
+                    {submissions.map((submission) => (
+                        <div key={submission.text + submission.createdAt} className={styles.submission}>
+                            {submission.text}
+                        </div>
+                    ))}
+                </div>
+                <div className={styles.footer}>
+                    <Input name="text" placeholder="Text" tagRef={textInput} />
+                    <Button color="blue" onClick={handleSubmit}>Submit</Button>
+                </div>
+            </div>
+        </PageWrapper>
     );
-}
+};
 
-export async function getServerSideProps(context) {
+export default JoinPage;
+
+export const getServerSideProps = async context => {
     const { db } = await connectToDatabase();
 
     const room = await db
@@ -67,4 +75,4 @@ export async function getServerSideProps(context) {
             code: room.code,
         },
     };
-}
+};

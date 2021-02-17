@@ -1,0 +1,46 @@
+@import 'styles/colors';
+
+@font-face {
+    font-family: 'snigletextrabold';
+    src: url('../public/font/sniglet-extrabold-webfont.woff2') format('woff2'),
+         url('../public/font/sniglet-extrabold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'snigletregular';
+    src: url('../public/font/sniglet-regular-webfont.woff2') format('woff2'),
+         url('../public/font/sniglet-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+    background-color: $blue;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+h1 {
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'snigletregular', Segoe UI, Roboto, sans-serif;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $dark-blue;
+    border-radius: 4px;
+}

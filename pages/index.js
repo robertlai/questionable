@@ -1,16 +1,15 @@
-import Link from 'next/link';
-import styles from '../styles/common.module.css';
+import Button from 'components/Button';
+import PageWrapper from 'components/PageWrapper';
+import styles from 'styles/pages/index.module.scss';
 
-export default function IndexPage() {
-    return (
-        <div className={styles.container}>
-            <h1>Questionable</h1>
-            <Link href="/host">
-                <a className={styles.link}>Host</a>
-            </Link>
-            <Link href="/join">
-                <a className={styles.link}>Join</a>
-            </Link>
+const IndexPage = () => (
+    <PageWrapper>
+        <div className={styles.content}>
+            <h1 className={styles.title}>Questionable</h1>
+            <Button full color="white" href="/host">Host</Button>
+            <Button full color="white" href="/join">Join</Button>
         </div>
-    );
-}
+    </PageWrapper>
+);
+
+export default IndexPage;

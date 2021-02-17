@@ -1,13 +1,16 @@
-import styles from '../../styles/common.module.css';
+import Button from 'components/Button';
+import Form from 'components/Form';
+import Input from 'components/Input';
+import PageWrapper from 'components/PageWrapper';
 
-export default function JoinIndexPage() {
-    return (
-        <form action="/api/join" method="get">
-            <div className={styles.container}>
-                <h1>Join</h1>
-                <input className={styles.input} name="code" placeholder="Code" />
-                <input className={styles.link} type="submit" value="Join" />
-            </div>
-        </form>
-    );
-}
+const JoinIndexPage = () => (
+    <PageWrapper>
+        <Form action="/api/join" method="get">
+            <h1>Join</h1>
+            <Input name="code" placeholder="Code" />
+            <Button full color="blue">Join</Button>
+        </Form>
+    </PageWrapper>
+);
+
+export default JoinIndexPage;

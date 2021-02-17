@@ -1,0 +1,13 @@
+@import 'styles/colors';
+
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    color: $white;
+    text-shadow: 2px 2px $dark-blue;
+    font-size: 48px;
+    margin: 12px 0;
+}

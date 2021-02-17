@@ -1,22 +1,28 @@
-import Link from 'next/link';
-import { TTL_MS } from '../../util/constants';
-import { connectToDatabase } from '../../util/mongodb';
-import styles from '../../styles/common.module.css';
+import Button from 'components/Button';
+import Form from 'components/Form';
+import PageWrapper from 'components/PageWrapper';
+import Table from 'components/Table';
+import { TTL_MS } from 'util/constants';
+import { connectToDatabase } from 'util/mongodb';
 
-export default function HostPage(props) {
-    return (
-        <div className={styles.container}>
+const HostPage = ({ code, title }) => (
+    <PageWrapper>
+        <Form>
             <h1>Hosting</h1>
-            <span>Title: {props.title}</span>
-            <span>Code: {props.code}</span>
-            <Link href={'/join/' + props.code}>
-                <a className={styles.link}>Join</a>
-            </Link>
-        </div>
-    );
-}
+            <Table data={[
+                ['Title', title],
+                ['Code', code],
+            ]} />
+            <Button full color="blue" href={'/join/' + code}>
+                Join
+            </Button>
+        </Form>
+    </PageWrapper>
+);
 
-export async function getServerSideProps(context) {
+export default HostPage;
+
+export const getServerSideProps = async context => {
     const { db } = await connectToDatabase();
 
     const room = await db
@@ -32,4 +38,4 @@ export async function getServerSideProps(context) {
             code: room.code,
         },
     };
-}
+};
